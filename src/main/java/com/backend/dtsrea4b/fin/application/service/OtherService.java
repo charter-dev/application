@@ -41,26 +41,26 @@ public class OtherService {
 
 	}
 	
-	public void addDataToCSV(OtherEntity otherEntity) throws Exception {
-
-		
-		// create a List which contains String array
-		List<String[]> data = new ArrayList<String[]>();
-			data.add(new String[] { LabelHelper.formatString(otherEntity.getId()),
-					LabelHelper.formatString(otherEntity.getJudul()),
-					LabelHelper.formatString(otherEntity.getContent()),
-					LabelHelper.formatString(otherEntity.getUrlgambar()),
-					LabelHelper.formatString(otherEntity.getCreatedby()),
-					LabelHelper.formatString(new Date())
-					});
-		CSVWriter csvWriter = createfile(CSV_FILE_PATH, "Testing.csv", true);
-
-		csvWriter.writeAll(data);
-
-		// closing writer connection
-		csvWriter.close();
-
-	}
+	/*
+	 * public void addDataToCSV(OtherEntity otherEntity) throws Exception {
+	 * 
+	 * 
+	 * // create a List which contains String array List<String[]> data = new
+	 * ArrayList<String[]>(); data.add(new String[] {
+	 * LabelHelper.formatString(otherEntity.getId()),
+	 * LabelHelper.formatString(otherEntity.getJudul()),
+	 * LabelHelper.formatString(otherEntity.getContent()),
+	 * LabelHelper.formatString(otherEntity.getUrlgambar()),
+	 * LabelHelper.formatString(otherEntity.getCreatedby()),
+	 * LabelHelper.formatString(new Date()) }); CSVWriter csvWriter =
+	 * createfile(CSV_FILE_PATH, "Testing.csv", true);
+	 * 
+	 * csvWriter.writeAll(data);
+	 * 
+	 * // closing writer connection csvWriter.close();
+	 * 
+	 * }
+	 */
 	
 	public static CSVWriter createfile(String folder, String name, Boolean isCreate) {
 
