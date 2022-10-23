@@ -11,30 +11,28 @@ import java.util.Scanner;
 
 import org.springframework.stereotype.Service;
 
-import com.backend.dtsrea4b.fin.application.model.OtherEntity;
+import com.backend.dtsrea4b.fin.application.model.UserEntity;
 import com.opencsv.CSVParser;
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.CSVWriter;
 
-
 @Service
-public class OtherService {
+public class UserService {
 
-
-	public static final String CSV_FILE_PATH = "/src/main/resources/other";
 	
-	public void addDataToCSV(OtherEntity otherEntity) throws Exception {
+public static final String CSV_FILE_PATH = "/src/main/resources/user";
+	
+	public void addDataToCSV(UserEntity userEntity) throws Exception {
 
 		
 		// create a List which contains String array
 		List<String[]> data = new ArrayList<String[]>();
-			data.add(new String[] { LabelHelper.formatString(otherEntity.getId()),
-					LabelHelper.formatString(otherEntity.getJudul()),
-					LabelHelper.formatString(otherEntity.getContent()),
-					LabelHelper.formatString(otherEntity.getUrlgambar()),
-					LabelHelper.formatString(otherEntity.getCreatedby()),
+			data.add(new String[] { LabelHelper.formatString(userEntity.getId()),
+					LabelHelper.formatString(userEntity.getUsername()),
+					LabelHelper.formatString(userEntity.getPassword()),
+					LabelHelper.formatString(userEntity.getCreatedby()),
 					LabelHelper.formatString(new Date())
 					});
 		CSVWriter csvWriter = createfile(CSV_FILE_PATH, "Testing.csv", true);
@@ -46,9 +44,9 @@ public class OtherService {
 
 	}
 	
-	public List<OtherEntity> readDataFromCSV() throws Exception {
+	public List<UserEntity> readDataFromCSV() throws Exception {
 
-		List<OtherEntity> list = new ArrayList<OtherEntity>();
+		List<UserEntity> list = new ArrayList<UserEntity>();
 
 		/*
 		 * List<List<String>> records = new ArrayList<List<String>>(); try (CSVReader
@@ -61,7 +59,7 @@ public class OtherService {
 
 		try {
 			// Create an object of file reader class with CSV file as a parameter.
-			FileReader filereader = new FileReader("/src/main/resources/otherTesting.csv");
+			FileReader filereader = new FileReader(CSV_FILE_PATH+"Testing.csv");
 
 			// create csvParser object with
 			// custom separator semi-colon
@@ -77,7 +75,7 @@ public class OtherService {
 			// Print Data.
 			for (String[] row : allData) {
 
-				list.add(new OtherEntity(row[0], row[1], row[2], row[3], row[4]));
+				list.add(new UserEntity(row[0], row[1], row[2], row[3]));
 
 			}
 
@@ -122,3 +120,4 @@ public class OtherService {
 	}
 	
 }
+

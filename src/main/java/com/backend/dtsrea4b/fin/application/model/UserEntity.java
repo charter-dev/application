@@ -10,8 +10,7 @@ import lombok.Data;
 public class UserEntity {
 
 	
-	private Integer id;
+	private String id;
 	private String username, password, createdby;
-	private Date createdtime;
 	
 }
