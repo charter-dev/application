@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,6 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.dtsrea4b.fin.application.model.Other;
@@ -28,6 +30,29 @@ public class OtherController {
 	String username = "API_user";
 	@Autowired
 	OtherService otherService;
+	
+	
+	@RequestMapping(name = "other", path = "/other", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public Map<String, Object> getid(HttpServletRequest request, @RequestParam("id") Integer id) {
+		logger.info(true);
+		long startTime = System.nanoTime();
+		Map<String, Object> respon = new HashMap<>();
+		try {
+			Optional<Other> listOptional;
+
+			listOptional = otherService.getSelectedid(id);
+			respon.put("Data", listOptional);
+
+			return respon;
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return respon;
+
+	}
 
 	@RequestMapping(name = "other", path = "/add", method = RequestMethod.POST, produces = {
 			MediaType.APPLICATION_JSON_VALUE })

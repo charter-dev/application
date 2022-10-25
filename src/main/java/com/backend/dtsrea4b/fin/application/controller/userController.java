@@ -15,9 +15,9 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.backend.dtsrea4b.fin.application.model.Other;
 import com.backend.dtsrea4b.fin.application.model.User;
 import com.backend.dtsrea4b.fin.application.model.userlogin;
 import com.backend.dtsrea4b.fin.application.service.UserService;
@@ -33,6 +33,29 @@ public class userController {
 
 	String username = "API_user";
 
+	
+	@RequestMapping(name = "other", path = "/user", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public Map<String, Object> getid(HttpServletRequest request, @RequestParam("id") Integer id) {
+		logger.info(true);
+		long startTime = System.nanoTime();
+		Map<String, Object> respon = new HashMap<>();
+		try {
+			Optional<User> listOptional;
+
+			listOptional = userServicess.getSelectedid(id);
+			respon.put("Data", listOptional);
+
+			return respon;
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return respon;
+
+	}
+	
 	@RequestMapping(name = "other", path = "/add", method = RequestMethod.POST, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public Map<String, Object> other(HttpServletRequest request, @RequestBody User user) {
