@@ -3,6 +3,8 @@ package com.backend.dtsrea4b.fin.application.model;
 import java.util.Date;
 import javax.annotation.Generated;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Other {
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2022-10-24T12:24:34.9575594+07:00", comments="Source field: other.id")
     private Integer id;
@@ -16,12 +18,14 @@ public class Other {
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2022-10-24T12:24:34.9575594+07:00", comments="Source field: other.createdBy")
     private String createdBy;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2022-10-24T12:24:34.9585465+07:00", comments="Source field: other.createdAt")
     private Date createdAt;
 
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2022-10-24T12:24:34.9585465+07:00", comments="Source field: other.updatedBy")
     private String updatedBy;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2022-10-24T12:24:34.9585465+07:00", comments="Source field: other.updatedAt")
     private Date updatedAt;
 
