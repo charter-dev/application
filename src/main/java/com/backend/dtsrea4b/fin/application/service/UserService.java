@@ -72,5 +72,18 @@ public class UserService {
 		return userMapper.selectOne(selectStatement);
 	}
 	
+	public Optional<User> getusername(String username) {
+		SelectStatementProvider selectStatement = null;
+		try {
+			selectStatement = select(UserDynamicSqlSupport.user.allColumns())
+					.from(UserDynamicSqlSupport.user).where(UserDynamicSqlSupport.username, isEqualTo(username)).build()
+					.render(RenderingStrategies.MYBATIS3);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return userMapper.selectOne(selectStatement);
+	}
+	
 }
 
