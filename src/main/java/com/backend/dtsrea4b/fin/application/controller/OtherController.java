@@ -65,9 +65,10 @@ public class OtherController {
 			Other listOptional;
 
 			List<Other> listhottopics=new ArrayList<Other>();
-			
+			listhottopics=otherService.getSelectedall();
+			 
 			Random rand = new Random();
-			listOptional = listhottopics.get(rand.nextInt(otherService.getSelectedall().size()));
+			listOptional = listhottopics.get(rand.nextInt(listhottopics.size()));
 			respon.put("Data", listOptional);
 
 			return respon;
