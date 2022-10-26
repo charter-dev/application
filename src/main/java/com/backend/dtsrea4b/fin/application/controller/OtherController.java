@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -42,6 +43,31 @@ public class OtherController {
 			Optional<Other> listOptional;
 
 			listOptional = otherService.getSelectedid(id);
+			respon.put("Data", listOptional);
+
+			return respon;
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return respon;
+
+	}
+	
+	@RequestMapping(name = "other", path = "/hottopics", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public Map<String, Object> gethot(HttpServletRequest request) {
+		logger.info(true);
+		long startTime = System.nanoTime();
+		Map<String, Object> respon = new HashMap<>();
+		try {
+			Other listOptional;
+
+			List<Other> listhottopics=new ArrayList<Other>();
+			
+			Random rand = new Random();
+			listOptional = listhottopics.get(rand.nextInt(otherService.getSelectedall().size()));
 			respon.put("Data", listOptional);
 
 			return respon;
