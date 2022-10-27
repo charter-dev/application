@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.backend.dtsrea4b.fin.application.model.Other;
-import com.backend.dtsrea4b.fin.application.model.User;
 import com.backend.dtsrea4b.fin.application.service.OtherService;
 
 @RestController
@@ -65,16 +64,20 @@ public class OtherController {
 		long startTime = System.nanoTime();
 		Map<String, Object> respon = new HashMap<>();
 		try {
-			Other listOptional;
-
-			List<Other> listhottopics=new ArrayList<Other>();
-			listhottopics=otherService.getSelectedall();
-			 
-			Random rand = new Random();
-			listOptional = listhottopics.get(rand.nextInt(listhottopics.size()));
+//			Other listOptional;
+//
+//			List<Other> listhottopics=new ArrayList<Other>();
+//			listhottopics=otherService.getSelectedall();
+//			 
+//			Random rand = new Random();
+//			listOptional = listhottopics.get(rand.nextInt(listhottopics.size()));
+//			
+////			String content=listOptional.getContent().substring(0, 100);
+////			listOptional.setContent(content);
 			
-//			String content=listOptional.getContent().substring(0, 100);
-//			listOptional.setContent(content);
+			Optional<Other> listOptional;
+
+			listOptional = otherService.getTopViews();
 			respon.put("Data", listOptional);
 
 			return respon;

@@ -70,4 +70,17 @@ public class OtherService {
 		}
 		return otherMapper.selectOne(selectStatement);
 	}
+	
+	public Optional<Other> getTopViews() {
+		SelectStatementProvider selectStatement = null;
+		try {
+			 selectStatement = select(OtherDynamicSqlSupport.other.allColumns())
+					.from(OtherDynamicSqlSupport.other).orderBy(OtherDynamicSqlSupport.viewsCount.descending()).limit(1).build()
+					.render(RenderingStrategies.MYBATIS3);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return otherMapper.selectOne(selectStatement);
+	}
 }
