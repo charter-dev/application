@@ -66,7 +66,8 @@ public class userController {
 		try {
 			long startTime = System.nanoTime();
 			
-			if(userServicess.getusername(user.getUsername())!=null){
+			Optional<User> cekuser=userServicess.getusername(user.getUsername());
+			if(cekuser.isPresent()){
 				respon.put("Status", HttpStatus.PRECONDITION_FAILED);
 				throw new ResponseStatusException(HttpStatus.PRECONDITION_FAILED, "Data sudah ada ");
 			}

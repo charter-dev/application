@@ -12,14 +12,17 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.backend.dtsrea4b.fin.application.model.Other;
+import com.backend.dtsrea4b.fin.application.model.User;
 import com.backend.dtsrea4b.fin.application.service.OtherService;
 
 @RestController
@@ -69,6 +72,9 @@ public class OtherController {
 			 
 			Random rand = new Random();
 			listOptional = listhottopics.get(rand.nextInt(listhottopics.size()));
+			
+//			String content=listOptional.getContent().substring(0, 100);
+//			listOptional.setContent(content);
 			respon.put("Data", listOptional);
 
 			return respon;
@@ -88,6 +94,14 @@ public class OtherController {
 		Map<String, Object> respon = new HashMap<>();
 		try {
 			long startTime = System.nanoTime();
+			other.setId(null);
+			
+			Optional<Other> cekOther=otherService.getTitle(other.getJudul());
+			if(cekOther.isPresent()){
+				respon.put("Status", HttpStatus.PRECONDITION_FAILED);
+				throw new ResponseStatusException(HttpStatus.PRECONDITION_FAILED, "Judul sudah ada ");
+			}
+			
 			Integer x = otherService.insertNew(other, username);
 			if (x == 0) {
 			} else {

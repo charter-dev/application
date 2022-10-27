@@ -14,7 +14,9 @@ import org.springframework.stereotype.Service;
 
 import com.backend.dtsrea4b.fin.application.mapper.OtherDynamicSqlSupport;
 import com.backend.dtsrea4b.fin.application.mapper.OtherMapper;
+import com.backend.dtsrea4b.fin.application.mapper.UserDynamicSqlSupport;
 import com.backend.dtsrea4b.fin.application.model.Other;
+import com.backend.dtsrea4b.fin.application.model.User;
 
 
 
@@ -55,4 +57,17 @@ public class OtherService {
 		return otherMapper.updateByPrimaryKey(other);
 	}
 	
+	
+	public Optional<Other> getTitle(String judul) {
+		SelectStatementProvider selectStatement = null;
+		try {
+			 selectStatement = select(OtherDynamicSqlSupport.other.allColumns())
+					.from(OtherDynamicSqlSupport.other).where(OtherDynamicSqlSupport.judul, isEqualTo(judul)).build()
+					.render(RenderingStrategies.MYBATIS3);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return otherMapper.selectOne(selectStatement);
+	}
 }
